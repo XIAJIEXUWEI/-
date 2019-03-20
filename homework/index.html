@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;margin: 0;
+			}
+			#content{
+				width: 400px;
+				margin: 0 auto;
+				text-align: center;
+			}
+			input{
+				display: inline;
+				margin-top: 80px;
+				height: 50px;width: 400px;line-height: 50px;
+				outline: none;
+				border-radius: 10px;
+				/*background-image: url(img/xiala.jpg);
+				background-size: 30px;
+				background-repeat: no-repeat;
+				background-position: 370px;*/
+			}
+			
+			ul{
+		       height: 400px;
+		       overflow-y: auto;
+		       overflow-x: hidden;
+			}
+			li{
+				width: 400px;padding: 10px 0px;
+				display: block;
+				background-color: gainsboro;
+				border: 1px solid  darkgray;
+				border-top: none;
+				border-radius: 10px;
+			}
+			li:hover{
+				border: 1px solid  darkslategrey;
+			}
+			li:active{
+				background-color: #A9A9A9;
+			}
+			span{
+				color: red;
+			}
+			img{
+				position: absolute;
+				width: 30px;
+				z-index: 999;
+				top:90px;
+				margin-left: 160px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			<input type="text" placeholder="请输入城市的名称"/>
+			<img src="img/xiala.jpg" />
+		<ul id="con" style="display: none;">
+			<li pname="北京" >北京</li>
+			<li pname="株洲" >株洲</li>
+			<li pname="上海" >上海</li>
+			<li pname="长沙" >长沙</li>
+			<li pname="杭州" >杭州</li>
+			<li pname="天津" >天津</li>
+			<li pname="西安" >西安</li>
+			<li pname="成都" >成都</li>
+			<li pname="武汉" >武汉</li>
+			<li pname="南京" >南京</li>
+		</ul>
+				
+		</div>
+        <script type="text/javascript">
+        	var li=document.getElementsByTagName('li');
+        	var text=document.getElementsByTagName('input')[0];
+        	var getUl=document.getElementsByTagName('ul');
+        	var img=document.getElementsByTagName('img');
+        	img[0].style.transform='rotate(90deg)'
+        	li[0].style.borderTop="1px solid darkgray";
+        	window.onload=function(){
+	        	for(let x=0;x<li.length;x++){
+	        		li[x].onclick=function(){
+	        			text.value=this.innerText;
+	        			getUl[0].style.display="none";
+	        			img[0].style.transform='rotate(90deg)';
+	        		};
+	        	}
+	        }
+        	function search(){
+        		var arr=text.value;
+        		for(var i=0;i<li.length;i++)
+        		{
+        			
+        			li[i].style.display="none";
+        			if(arr==""){
+        				li[i].style.display="block";
+        				var innr=li[i].innerText;
+	        			li[i].innerHTML=li[i].innerText;
+	        			img[0].style.transform='rotate(0deg)';
+	        			getUl[0].style.display="block";
+        			}
+        			else{
+	        			if(li[i].getAttribute('pname').indexOf(arr)!=-1)
+	        			{
+	        				getUl[0].style.display="block";
+	        				li[i].style.display="block";
+	        				var innr=li[i].innerText;
+	        				li[i].innerHTML=li[i].innerText;
+	        				li[i].innerHTML=li[i].innerHTML.replace(RegExp(arr,'g'),'<span>'+arr+'</span>');
+	        				img[0].style.transform='rotate(0deg)';
+	        			}
+	        		}
+        		}
+        	}
+	        text.oninput=function(){
+	        	search();
+	        }
+	        img[0].onclick=function(){
+	        	if(getUl[0].style.display=="none"){
+	        		getUl[0].style.display="block";
+	        		img[0].style.transform='rotate(0deg)';
+	        	}
+	        	else if(getUl[0].style.display=="block"){
+	        		getUl[0].style.display="none";
+	        		img[0].style.transform='rotate(90deg)';
+	        	}
+	        }
+	        
+  </script>
+	</body>
+</html>
